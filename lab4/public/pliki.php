@@ -113,6 +113,8 @@ if (filter_input(INPUT_POST, 'submit')) {
         <button type="submit" name="submit" value="java">Java</button>
     </div>
 </form>
-
+<div>
+    <a href="./index.php">Powrót do strony głównej</a>
+</div>
 </body>
 </html>
