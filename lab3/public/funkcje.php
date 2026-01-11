@@ -21,7 +21,7 @@ function dodaj()
 
 function pokaz($plik)
 {
-    if (file_exists('dane.txt')) {
+    if (file_exists($plik)) {
         echo "<h3>Wszystkie zamówienia:</h3>";
         echo "<pre>";
         echo htmlspecialchars(file_get_contents($plik));

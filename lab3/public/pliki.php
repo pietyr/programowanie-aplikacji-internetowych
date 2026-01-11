@@ -109,7 +109,6 @@ if (isset($_POST['submit'])) {
 </form>
 <div>
     <pre>
-        <?= var_dump($_SERVER) ?>
     </pre>
 </div>
 </body>

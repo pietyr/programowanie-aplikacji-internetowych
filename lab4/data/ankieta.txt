@@ -1,8 +1,8 @@
 C:1
 CPP:0
-Java:0
+Java:1
 C#:0
-Html:2
+Html:3
 CSS:2
 XML:0
 PHP:1

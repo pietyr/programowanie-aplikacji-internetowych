@@ -30,5 +30,13 @@
         "email": "asda@csas.com",
         "date": "2026-01-11",
         "status": 0
+    },
+    {
+        "userName": "fdafda3",
+        "passwd": "$2y$12$6sOsQ9cw4BayIHo0qQoYO.D4QNyEjUxO0DONhHw2wNjAa1mMJdG.6",
+        "fullName": "Jan Kowalski",
+        "email": "testets@gmail.com",
+        "date": "2026-01-11",
+        "status": 0
     }
 ]
