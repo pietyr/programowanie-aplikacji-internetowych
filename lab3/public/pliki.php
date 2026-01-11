@@ -107,5 +107,10 @@ if (isset($_POST['submit'])) {
         <button type="submit" name="submit" value="java">Java</button>
     </div>
 </form>
+<div>
+    <pre>
+        <?= var_dump($_SERVER) ?>
+    </pre>
+</div>
 </body>
 </html>
