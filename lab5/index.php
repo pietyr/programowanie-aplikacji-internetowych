@@ -11,19 +11,23 @@
 <h1>Klasy</h1>
 <div>
     <?php
-    include 'klasy/User.php';
+    include_once 'klasy/User.php';
+    include_once 'klasy/RegistrationForm.php';
 
-    $user1 = new User('userOne', 'passwd1234', 'Jan Adamczewski', 'jan@adamczycha.pl');
-    $user2 = new User('userTwo', 'haslo', 'Jan Kowalski', 'jan@kowalski.pl');
+    $rf = new RegistrationForm(); // wyświetla formularz
 
-    $user1->show();
-    $user2->show();
+    if (filter_input(INPUT_POST, 'submit')) {
+        $user = $rf->checkUser();
 
-    $user2->setUserName('admin');
-    $user2->setStatus(User::STATUS_ADMIN);
-    $user2->show();
-
+        if ($user === null) {
+            echo "<p>Niepoprawne dane rejestracji.</p>";
+        } else {
+            echo "<p>Poprawne dane rejestracji:</p>";
+            $user->show();
+        }
+    }
     ?>
 </div>
+
 </body>
 </html>
