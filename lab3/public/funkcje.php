@@ -19,20 +19,20 @@ function dodaj()
     return $dane;
 }
 
-function pokaz()
+function pokaz($plik)
 {
     if (file_exists('dane.txt')) {
         echo "<h3>Wszystkie zamówienia:</h3>";
         echo "<pre>";
-        echo htmlspecialchars(file_get_contents('dane.txt'));
+        echo htmlspecialchars(file_get_contents($plik));
         echo "</pre>";
     }
 }
 
-function pokaz_zamowienie($jezyk)
+function pokaz_zamowienie($jezyk, $plik)
 {
-    if (file_exists('dane.txt')) {
-        $linie = file('dane.txt', FILE_IGNORE_NEW_LINES);
+    if (file_exists($plik)) {
+        $linie = file($plik, FILE_IGNORE_NEW_LINES);
 
         echo "<h3>Zamówienia na tutorial: $jezyk</h3>";
         echo "<pre>";

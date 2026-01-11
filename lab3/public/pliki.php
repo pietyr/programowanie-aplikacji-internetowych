@@ -2,6 +2,7 @@
 include 'funkcje.php';
 
 $jezyki = ["C", "CPP", "Java", "C#", "HTML", "CSS", "XML", "PHP", "JavaScript"];
+$plik = $_SERVER['DOCUMENT_ROOT'] . '/../data/dane.txt';
 
 
 if (isset($_POST['submit'])) {
@@ -9,23 +10,23 @@ if (isset($_POST['submit'])) {
     switch ($_POST['submit']) {
 
         case 'save':
-            file_put_contents('dane.txt', dodaj(), FILE_APPEND);
+            file_put_contents($plik, dodaj(), FILE_APPEND);
             break;
 
         case 'show':
-            pokaz();
+            pokaz($plik);
             break;
 
         case 'php':
-            pokaz_zamowienie('PHP');
+            pokaz_zamowienie('PHP', $plik);
             break;
 
         case 'cpp':
-            pokaz_zamowienie('CPP');
+            pokaz_zamowienie('CPP', $plik);
             break;
 
         case 'java':
-            pokaz_zamowienie('Java');
+            pokaz_zamowienie('Java', $plik);
             break;
     }
 }
