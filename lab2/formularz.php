@@ -1,3 +1,6 @@
+<?php
+$jezyki = ["C", "CPP", "Java", "C#", "HTML", "CSS", "XML", "PHP", "JavaScript"]
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,18 +45,12 @@
     </div>
     <h3>Zamawiam tutorial z języka:</h3>
     <div>
-        <label>
-            <input type="checkbox" name="tutorial[]" value="PHP">
-            <span>PHP</span>
-        </label>
-        <label>
-            <input type="checkbox" name="tutorial[]" value="C/C++">
-            <span>C/C++</span>
-        </label>
-        <label>
-            <input type="checkbox" name="tutorial[]" value="Java">
-            <span>Java</span>
-        </label>
+        <?php foreach ($jezyki as $jezyk): ?>
+            <label>
+                <input type="checkbox" name="tutorial[]" value="<?= $jezyk ?>">
+                <span><?= $jezyk ?></span>
+            </label>
+        <?php endforeach; ?>
     </div>
     <h3>Sposób zapłaty:</h3>
     <div>
