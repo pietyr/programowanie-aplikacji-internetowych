@@ -18,6 +18,10 @@ if (filter_input(INPUT_POST, 'submit')) {
             pokaz($plik);
             break;
 
+        case 'stats':
+            statystyki($plik);
+            break;
+
         case 'php':
             pokaz_zamowienie('PHP', $plik);
             break;
@@ -103,6 +107,7 @@ if (filter_input(INPUT_POST, 'submit')) {
         <button type="submit" name="submit" value="clear">Wyczyść</button>
         <button type="submit" name="submit" value="save">Zapisz</button>
         <button type="submit" name="submit" value="show">Pokaż</button>
+        <button type="submit" name="submit" value="stats">Statystyki</button>
         <button type="submit" name="submit" value="php">PHP</button>
         <button type="submit" name="submit" value="cpp">CPP</button>
         <button type="submit" name="submit" value="java">Java</button>

@@ -110,3 +110,43 @@ function pokaz_zamowienie($jezyk, $plik)
         echo "</pre>";
     }
 }
+
+/**
+ * Statystyki zamówień
+ */
+function statystyki($plik)
+{
+    if (!file_exists($plik)) {
+        echo "<p>Brak danych do statystyk.</p>";
+        return;
+    }
+
+    $linie = file($plik, FILE_IGNORE_NEW_LINES);
+
+    $wszystkie = 0;
+    $ponizej18 = 0;
+    $powyzej49 = 0;
+
+    foreach ($linie as $linia) {
+        if (trim($linia) === "") continue;
+
+        $wszystkie++;
+
+        $dane = explode(" ", $linia);
+        $wiek = (int)$dane[1]; // wiek jest drugim polem
+
+        if ($wiek < 18) {
+            $ponizej18++;
+        }
+
+        if ($wiek >= 50) {
+            $powyzej49++;
+        }
+    }
+
+    echo "<h3>Statystyki zamówień:</h3>";
+    echo "<p>Liczba wszystkich zamówień: $wszystkie</p>";
+    echo "<p>Liczba zamówień od osób w wieku &lt; 18 lat: $ponizej18</p>";
+    echo "<p>Liczba zamówień od osób w wieku ≥ 50 lat: $powyzej49</p>";
+}
+
