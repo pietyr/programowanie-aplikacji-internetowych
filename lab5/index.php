@@ -24,8 +24,13 @@
         } else {
             echo "<p>Poprawne dane rejestracji:</p>";
             $user->show();
+
+            // zapis do pliku JSON
+            $user->save("users.json");
         }
     }
+
+    User::getAllUsers("users.json");
     ?>
 </div>
 

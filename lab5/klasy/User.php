@@ -89,6 +89,40 @@ public function getUserName(): string{
         $this->passwd = password_hash($passwd, PASSWORD_DEFAULT);
     }
 
+    public static function getAllUsers(string $plik): void
+    {
+        $tab = json_decode(file_get_contents($plik));
+
+        foreach ($tab as $val) {
+            echo "<p>";
+            echo $val->userName . " ";
+            echo $val->fullName . " ";
+            echo $val->date;
+            echo "</p>";
+        }
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "userName" => $this->userName,
+            "passwd" => $this->passwd,
+            "fullName" => $this->fullName,
+            "email" => $this->email,
+            "date" => $this->date->format('Y-m-d'),
+            "status" => $this->status
+        ];
+    }
+
+    public function save(string $plik): void
+    {
+        $tab = json_decode(file_get_contents($plik), true);
+        $tab[] = $this->toArray();
+        file_put_contents($plik, json_encode($tab, JSON_PRETTY_PRINT));
+    }
+
+
+
 
 
 }
