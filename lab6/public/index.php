@@ -1,10 +1,10 @@
 <?php
 
-include_once '../Baza.php';
-
+//include_once '../Baza.php';
+include_once '../BazaPDO.php';
 include_once 'funkcje.php';
 
-$bd = new Baza('localhost', 'db', '', 'klienci');
+$bd = new BazaPDO('localhost', 'db', '', 'klienci');
 ?>
 
 <!doctype html>
@@ -85,7 +85,7 @@ if (filter_input(INPUT_POST, "submit")) {
             dodajdoBD($bd);
             break;
         case "Pokaż":
-            echo "<h3>Zawartość bazy danych:</h3>";
+            echo "<h3>Zawartość bazy danych (PDO):</h3>";
             $pola = ["Id", "Nazwisko", "Wiek", "Panstwo", "Email", "Zamowienie", "Platnosc"];
             echo $bd->select("SELECT * FROM klienci", $pola);
             break;
