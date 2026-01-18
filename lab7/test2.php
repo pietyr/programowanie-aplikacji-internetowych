@@ -1,42 +1,36 @@
 <?php
+include_once 'klasy/User.php';
 session_start();
 ?>
 <!doctype html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Sesja - Test 2</title>
+    <title>Sesja - Test 2 (Obiekt)</title>
 </head>
 <body>
-<h1>Strona testowa 2</h1>
+<h1>Strona testowa 2 (Odczyt obiektu)</h1>
 
-<h3>e) Informacje o sesji przed usunięciem:</h3>
+<h3>Informacje o obiekcie w sesji:</h3>
 <?php
 echo "<p><strong>ID sesji:</strong> " . session_id() . "</p>";
 
-echo "<h4>Zmienne sesji ($_SESSION):</h4><ul>";
-if (empty($_SESSION)) {
-    echo "<li>Brak zmiennych sesji</li>";
+if (isset($_SESSION['user'])) {
+    // Deserializacja obiektu z sesji
+    $user = unserialize($_SESSION['user']);
+
+    echo "<h4>Dane pobrane z obiektu User:</h4>";
+    $user->show(); // Wykorzystanie metody klasy User
 } else {
-    foreach ($_SESSION as $key => $value) {
-        echo "<li>$key = $value</li>";
-    }
+    echo "<p>Brak obiektu user w sesji.</p>";
 }
-echo "</ul>";
 
 // Usunięcie sesji
 session_destroy();
-
-// b) Wyświetlenie ciasteczek
-echo "<h4>Ciasteczka ($_COOKIE):</h4><ul>";
-foreach ($_COOKIE as $key => $value) {
-    echo "<li>$key = $value</li>";
-}
-echo "</ul>";
 ?>
 
-<p style="color: red;">Sesja została usunięta (session_destroy).</p>
+<hr>
+<p style="color: red;">Sesja została usunięta.</p>
 <p><a href="test1.php">Powrót do strony test1.php</a></p>
-
 </body>
 </html>
