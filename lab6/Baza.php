@@ -1,9 +1,5 @@
 <?php
 
-namespace lab6;
-
-use mysqli;
-
 class Baza
 {
     private mysqli $mysqli; //uchwyt do BD
@@ -53,14 +49,21 @@ class Baza
         return $tresc;
     }
 
-    public function delete($sql)
+    public function delete($sql): bool
     {
-// uzupełnij zapytanie – i zwróć true lub false
+        if ($this->mysqli->query($sql)) {
+            return true;
+        }
+        return false;
     }
 
-    public function insert($sql)
+    public function insert($sql): bool
     {
-        if ($this->mysqli->query($sql)) return true; else return false;
+        if ($this->mysqli->query($sql)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getMysqli()

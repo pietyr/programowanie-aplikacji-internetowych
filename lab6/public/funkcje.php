@@ -152,10 +152,51 @@ function statystyki($plik)
 
 function dodajdoBD($bd)
 {
-//pobierz dane z formularza, dokonaj ich walidacji
-//jeśli dane są poprawne - sformułuj zapytanie $sql typu insert np.:
-// INSERT INTO klienci VALUES (NULL, 'Babacka', '22', 'Niemcy',
-// 'bbbp@ollub.pl', 'Java,CPP', 'Przelew');
-//i wywołaj metodę:
-//$bd->insert($sql);
+    $args = [
+        'nazwisko' => [
+            'filter' => FILTER_VALIDATE_REGEXP,
+            'options' => ['regexp' => '/^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż-]{1,25}$/']
+        ],
+        'wiek' => [
+            'filter' => FILTER_VALIDATE_INT,
+            'options' => ['min_range' => 1, 'max_range' => 130]
+        ],
+        'panstwo' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'email' => FILTER_VALIDATE_EMAIL,
+        'platnosc' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'tutorial' => [
+            'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'flags' => FILTER_REQUIRE_ARRAY
+        ]
+    ];
+
+    $dane = filter_input_array(INPUT_POST, $args);
+
+    $errors = "";
+    foreach ($dane as $key => $val) {
+        if ($val === false || $val === null) {
+            $errors .= $key . " ";
+        }
+    }
+
+    if ($errors === "") {
+        // Przygotowanie danych do zapytania (obsługa zestawu SET dla tutoriali)
+        $nazwisko = $dane['nazwisko'];
+        $wiek = $dane['wiek'];
+        $panstwo = $dane['panstwo'];
+        $email = $dane['email'];
+        $zamowienie = implode(",", $dane['tutorial']);
+        $platnosc = $dane['platnosc'];
+
+        $sql = "INSERT INTO klienci (Nazwisko, Wiek, Panstwo, Email, Zamowienie, Platnosc) 
+                VALUES ('$nazwisko', $wiek, '$panstwo', '$email', '$zamowienie', '$platnosc')";
+
+        if ($bd->insert($sql)) {
+            echo "<p>Dodano rekord do bazy danych.</p>";
+        } else {
+            echo "<p>Błąd podczas dodawania do bazy.</p>";
+        }
+    } else {
+        echo "<p>Błędne dane: $errors</p>";
+    }
 }
